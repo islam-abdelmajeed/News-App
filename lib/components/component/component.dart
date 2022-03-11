@@ -1,4 +1,3 @@
-import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/modules/web_view/web_view_screen.dart';
 
@@ -100,16 +99,19 @@ Widget myDivider() => Padding(
       ),
     );
 
-Widget articlesBuilder(list, context, {isSearch = false}) => ConditionalBuilder(
-      condition: list.length != 0,
-      builder: (context) => ListView.separated(
-        physics: BouncingScrollPhysics(),
-        itemBuilder: (context, index) => buildArticleItem(list[index], context),
-        separatorBuilder: (context, index) => myDivider(),
-        itemCount: list.length,
-      ),
-      fallback: (context) =>isSearch?Container() : Center(child: CircularProgressIndicator()),
+Widget articlesBuilder(list, context, {isSearch = false}) {
+  if (list.length != 0){
+    return ListView.separated(
+      physics: BouncingScrollPhysics(),
+      itemBuilder: (context, index) => buildArticleItem(list[index], context),
+      separatorBuilder: (context, index) => myDivider(),
+      itemCount: list.length,
     );
+  }else {
+    return isSearch?Container() : Center(child: CircularProgressIndicator());
+  }
+}
+
 
 void navigatTo(context, widget) => Navigator.push(
   context ,

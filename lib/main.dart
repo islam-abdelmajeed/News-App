@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
             create: (BuildContext context) => AppCubit()..changeAppMode(
-              fromShared: isDark!,
+              fromShared: isDark,
             )
 
         ),
