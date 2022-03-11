@@ -3,24 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:news_app/modules/web_view/web_view_screen.dart';
 
 Widget defaultFormField({
-  @required TextEditingController controller,
-  @required TextInputType type,
-  Function onSubmit,
-  Function onChanged,
-  Function onTap,
-  @required Function validate,
-  @required String label,
-  @required IconData prefix,
+  required TextEditingController controller,
+  required TextInputType type,
+  Function? onSubmit,
+  Function? onChanged,
+  Function? onTap,
+  required Function validate,
+  required String label,
+  required IconData prefix,
   bool isClickable = true,
 }) =>
     TextFormField(
       controller: controller,
       keyboardType: type,
-      onFieldSubmitted: onSubmit,
-      onChanged: onChanged,
-      onTap: onTap,
+      onFieldSubmitted: (s){
+        onSubmit!(s);
+      },
+      onChanged: (s){
+        onChanged!(s);
+      },
+      onTap: (){
+        onTap!();
+      },
       enabled: isClickable,
-      validator: validate,
+      validator: (s){
+        validate();
+      },
       decoration: InputDecoration(
           labelText: label,
           prefixIcon: Icon(prefix),

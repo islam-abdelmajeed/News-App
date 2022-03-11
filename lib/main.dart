@@ -16,14 +16,14 @@ void main() async
   DioHelper.init();
   await CacheHelper.init();
 
-  bool isDark = CacheHelper.getBoolean(key: 'isDark');
+  bool? isDark = CacheHelper.getBoolean(key: 'isDark');
 
   runApp(MyApp(isDark));
 }
 
 class MyApp extends StatelessWidget {
 
-  final bool isDark;
+   bool? isDark;
 
   MyApp(this.isDark);
 
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
             create: (BuildContext context) => AppCubit()..changeAppMode(
-              fromShared: isDark,
+              fromShared: isDark!,
             )
 
         ),
@@ -55,7 +55,6 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.white,
               appBarTheme: AppBarTheme(
                 titleSpacing: 20.0,
-                backwardsCompatibility: false,
                 systemOverlayStyle: SystemUiOverlayStyle(
                   statusBarColor: Colors.white,
                   statusBarIconBrightness: Brightness.dark,
@@ -91,7 +90,6 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: HexColor('333739'),
               appBarTheme: AppBarTheme(
                 titleSpacing: 20.0,
-                backwardsCompatibility: false,
                 systemOverlayStyle: SystemUiOverlayStyle(
                   statusBarColor: HexColor('333739'),
                   statusBarIconBrightness: Brightness.light,
