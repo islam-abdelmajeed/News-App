@@ -9,6 +9,8 @@ import 'package:news_app/network/local/shared_preferences.dart';
 import 'package:news_app/network/remote/dio_helper.dart';
 import 'layout/news_layout.dart';
 
+
+
 void main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,18 +34,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => NewsCubit()
-            ..getBusiness()
-            ..getSports()
-            ..getScience()
-            ..getHealth(),
+          create: (BuildContext context) => NewsCubit()..getBusiness()..getSports()..getScience()..getHealth(),
         ),
-        BlocProvider(
-            create: (BuildContext context) => AppCubit()..changeAppMode(
-              fromShared: isDark,
-            )
-
-        ),
+        BlocProvider(create: (BuildContext context) => AppCubit()..changeAppMode(fromShared: isDark)),
       ],
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
